@@ -16,21 +16,35 @@ function ItemList() {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">Delete</h1>
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="text-center">Item List</h1>
+      </div>
       
-      <ul className="list-group">
-        {items.map(item => (  // Asegúrate de que 'item' esté aquí
-          <li key={item.id} className="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>{item.name}</strong> - {item.description}
-            </div>
-            <div>
-              <Link to={`/update/${item.id}`} className="btn btn-warning btn-sm me-2">Update</Link>
-              <button onClick={() => handleDelete(item.id)} className="btn btn-danger btn-sm">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <table className="table table-striped table-hover">
+        <thead className="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {items.map(item => (
+            <tr key={item.id}>
+              <td><strong>{item.name}</strong></td>
+              <td>{item.description}</td>
+              <td>
+                <Link to={`/update/${item.id}`} className="btn btn-warning btn-sm me-2">
+                  <i className="bi bi-pencil-square"></i> Update
+                </Link>
+                <button onClick={() => handleDelete(item.id)} className="btn btn-danger btn-sm">
+                  <i className="bi bi-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
